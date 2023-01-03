@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.ts_converter &mdash; Python Interface to SDMX Web Services  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python Interface to SDMX Web Services
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../INSTALL.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python Interface to SDMX Web Services</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.ts_converter</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/src/ts_converter/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src.ts_converter">
+<span id="src-ts-converter"></span><h1><a class="reference internal" href="#module-src.ts_converter" title="src.ts_converter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">src.ts_converter</span></code></a><a class="headerlink" href="#module-src.ts_converter" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.ts_converter.convert_dim_list" title="src.ts_converter.convert_dim_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_dim_list</span></code></a>(dl)</p></td>
+<td><p>Converts the list of SDMX dimensions to a Python list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.ts_converter.convert_hashtable" title="src.ts_converter.convert_hashtable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_hashtable</span></code></a>(ht)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.ts_converter.convert_timeseries_list" title="src.ts_converter.convert_timeseries_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_timeseries_list</span></code></a>(tsl)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.ts_converter.convert_timeseries_dataframe" title="src.ts_converter.convert_timeseries_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_timeseries_dataframe</span></code></a>(table)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.ts_converter.convert_single_timeseries" title="src.ts_converter.convert_single_timeseries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_single_timeseries</span></code></a>(jpts[, plain])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.ts_converter.zoo" title="src.ts_converter.zoo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zoo</span></code></a>(values, order_by)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.ts_converter.make_SDMXTS" title="src.ts_converter.make_SDMXTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_SDMXTS</span></code></a>(freq, times, values[, enforce_format])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.convert_dim_list">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">convert_dim_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.convert_dim_list" title="Permalink to this definition"></a></dt>
+<dd><p>Converts the list of SDMX dimensions to a Python list.</p>
+<p>This function is used to convert an input list of SDMX dimensions into a list of Dimension namedtuples, containing the dimension id and full identifier. The dimension id can be used to query dimension codes via the function get_codes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.convert_hashtable">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">convert_hashtable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ht</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.convert_hashtable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.convert_timeseries_list">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">convert_timeseries_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tsl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.convert_timeseries_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.convert_timeseries_dataframe">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">convert_timeseries_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.convert_timeseries_dataframe" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.convert_single_timeseries">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">convert_single_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.convert_single_timeseries" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.zoo">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">zoo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_by</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.zoo" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ts_converter.make_SDMXTS">
+<span class="sig-prename descclassname"><span class="pre">src.ts_converter.</span></span><span class="sig-name descname"><span class="pre">make_SDMXTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enforce_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.ts_converter.make_SDMXTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Francesco Romano.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

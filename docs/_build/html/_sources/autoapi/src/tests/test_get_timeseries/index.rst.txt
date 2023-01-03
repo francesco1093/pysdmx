@@ -1,0 +1,22 @@
+:py:mod:`src.tests.test_get_timeseries`
+=======================================
+
+.. py:module:: src.tests.test_get_timeseries
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.tests.test_get_timeseries.test_get_timeseries_v2
+
+
+
+.. py:function:: test_get_timeseries_v2()
+
+

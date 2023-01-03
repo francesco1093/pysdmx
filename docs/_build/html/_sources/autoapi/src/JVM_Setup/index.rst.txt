@@ -1,0 +1,29 @@
+:py:mod:`src.JVM_Setup`
+=======================
+
+.. py:module:: src.JVM_Setup
+
+
+Module Contents
+---------------
+
+.. py:data:: CLIENT_HANDLER
+   :annotation: = it.bancaditalia.oss.sdmx.client.SdmxClientHandler
+
+   
+
+.. py:data:: SdmxClientHandler
+   
+
+   
+
+.. py:data:: UTILS_HANDLER
+   :annotation: = it.bancaditalia.oss.sdmx.util.Utils
+
+   
+
+.. py:data:: Utils
+   
+
+   
+

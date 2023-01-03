@@ -1,0 +1,35 @@
+:py:mod:`src.tests.test_get_codes`
+==================================
+
+.. py:module:: src.tests.test_get_codes
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.tests.test_get_codes.test_get_codes
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   src.tests.test_get_codes.codes
+
+
+.. py:function:: test_get_codes()
+
+
+.. py:data:: codes
+   
+
+   
+

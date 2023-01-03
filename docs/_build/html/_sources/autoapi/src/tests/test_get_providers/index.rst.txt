@@ -1,0 +1,22 @@
+:py:mod:`src.tests.test_get_providers`
+======================================
+
+.. py:module:: src.tests.test_get_providers
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.tests.test_get_providers.test_get_providers
+
+
+
+.. py:function:: test_get_providers()
+
+

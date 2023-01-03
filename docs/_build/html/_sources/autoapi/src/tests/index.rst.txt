@@ -1,0 +1,17 @@
+:py:mod:`src.tests`
+===================
+
+.. py:module:: src.tests
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   test_get_codes/index.rst
+   test_get_providers/index.rst
+   test_get_timeseries/index.rst
+
+

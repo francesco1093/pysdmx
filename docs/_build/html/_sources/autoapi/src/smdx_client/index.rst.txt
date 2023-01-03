@@ -1,0 +1,259 @@
+:py:mod:`src.smdx_client`
+=========================
+
+.. py:module:: src.smdx_client
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   src.smdx_client.get_providers
+   src.smdx_client.get_dsd_identifier
+   src.smdx_client.get_flows
+   src.smdx_client.get_dimensions
+   src.smdx_client.get_codes
+   src.smdx_client.get_timeseries
+   src.smdx_client.get_timeseries_table
+   src.smdx_client.get_timeseries_revisions
+
+
+
+.. py:function:: get_providers() -> Dict[str, str]
+
+   Extract the list of available Data Providers.
+
+   This function is used to query the list of currently available data providers.
+
+
+   :returns: dict-like object where keys are words and values are counts.
+   :rtype: Dict[str, str]
+
+   .. rubric:: Examples
+
+   >>> get_providers()
+
+
+.. py:function:: get_dsd_identifier(provider: str, dataflow: str) -> str
+
+   Extracts the dsd identifier of a DataFlow.
+
+   This function is used to retrieve the name of the keyfamily of the input dataflow.
+
+   :param provider: Name of the provider.
+   :type provider: str
+   :param dataflow: Identifier of the dataflow.
+   :type dataflow: str
+
+   :returns: name of the keyfamily of the input dataflow.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> id = get_dsd_identifier('ECB','EXR')
+
+
+.. py:function:: get_flows(provider: str, pattern='') -> Dict[str, str]
+
+   Extract the list of DataFlows of a provider.
+
+   This function is used to query the list of dataflows of the provider. A matching pattern can be provided, if needed.
+
+   :param provider: Name of the provider.
+   :type provider: str
+   :param pattern: Pattern to match against the dataflow id or description. If a pattern is not provided, all dataflows are returned.
+   :type pattern: str
+
+   :returns: dict-like object where keys are codes and values are descriptions.
+   :rtype: Dict[str, str]
+
+   .. rubric:: Examples
+
+   >>> ## get all flows from ECB
+   >>> flows = get_flows('ECB')
+   >>> ## get all flows that contain the 'EXR
+   >>> flows = get_flows('ECB','*EXR*')
+
+
+.. py:function:: get_dimensions(provider: str, dataflow: str) -> Dict[str, str]
+
+   Extract the dimensions of a DataFlow.
+
+   This function is used to retrieve the list of dimensions of the input dataflow
+
+   :param provider: Name of the provider.
+   :type provider: str
+   :param dataflow: Identifier of the dataflow.
+   :type dataflow: str
+
+   :returns: dict-like object where keys are dimension ids and values are their descriptions.
+   :rtype: Dict[str, str]
+
+   .. rubric:: Examples
+
+   >>> dims = get_dimensions('ECB','EXR')
+
+
+.. py:function:: get_codes(provider, dataflow, dimension) -> Dict[str, str]
+
+   Extract the codes relative to a specific dimension.
+
+   This function is used to retrieve the list of codes of the input dimension
+
+   :param provider: Name of the provider.
+   :type provider: str
+   :param dataflow: Identifier of the dataflow.
+   :type dataflow: str
+   :param dimension: Identifier of the dimension.
+   :type dimension: str
+
+   :returns: dict-like object where keys are code ids and values are their descriptions.
+   :rtype: Dict[str, str]
+
+   .. rubric:: Examples
+
+   >>> codes = get_codes('ECB','EXR','FREQ')
+
+
+.. py:function:: get_timeseries(provider: str, id: str = '', start: str = '', end: str = '', dataflow: str = '', filter: str = '') -> list
+
+   Extract a list of time series.
+
+   This function is used to extract a list of time series identified by the parameters provided in input.
+
+   :param provider: Name of the provider
+   :type provider: str
+   :param id: Timeseries key
+   :type id: str
+   :param start: Start time - optional
+   :type start: str
+   :param end: End time - optional
+   :type end: str
+   :param dataflow: Identifier of the dataflow - optional
+   :type dataflow: str
+   :param filter: Filter to be applied - optional
+   :type filter: str
+
+   :returns: * *list* -- A list of time series identified by the parameters provided in input.
+             * *Dict[str, str]* -- A dictionary containing time series attributes
+
+   .. rubric:: Examples
+
+   >>> SDMX V2
+   >>> ## get single time series:
+   >>> my_ts=get_timeseries('ECB',id='EXR.A.USD.EUR.SP00.A')
+   >>> ## get monthly and annual frequency:
+   >>> my_ts=get_timeseries('ECB',id='EXR.A+M.USD.EUR.SP00.A')
+   >>> ## get all available frequencies:
+   >>> my_ts=get_timeseries('ECB',id='EXR..USD.EUR.SP00.A')
+   >>>
+   >>> # SDMX V3
+   >>>
+   >>> ## get single time series:
+   >>> my_ts=get_timeseries('ECB', dataflow='EXR', id='A.USD.EUR.SP00.A')
+   >>> ## get monthly and annual frequency:
+   >>> my_ts=get_timeseries('ECB', dataflow='EXR', id='A+M.USD.EUR.SP00.A')
+   >>> ## get all available frequencies:
+   >>> my_ts=get_timeseries('ECB', dataflow='EXR', id='.USD.EUR.SP00.A')
+   >>>
+   >>> #or
+   >>>
+   >>> ## get single time series: EXR.A.USD.EUR.SP00.A
+   >>> my_ts=get_timeseries('ECB', dataflow='EXR', filter='c[FREQ]=A&c[CURRENCY]=USD&c[CURRENCY_DENOM]=EUR&c[EXR_TYPE]=SP00&c[EXR_SUFFIX]=A')
+   >>> ## get monthly and annual frequency:
+   >>> my_ts=get_timeseries('ECB', dataflow='EXR', filter='c[FREQ]=A,M&c[CURRENCY]=USD&c[CURRENCY_DENOM]=EUR&c[EXR_TYPE]=SP00&c[EXR_SUFFIX]=A')
+   >>> ## get all available frequencies:
+   >>> my_ts=get_timeseries('ECB', dataflow='EXR', filter='c[CURRENCY]=USD&c[CURRENCY_DENOM]=EUR&c[EXR_TYPE]=SP00&c[EXR_SUFFIX]=A')
+
+
+.. py:function:: get_timeseries_table(provider, id='', start='', end='', dataflow='', filter='')
+
+   Extract a list of time series as Pandas DataFrame
+
+
+   This function is used to extract a list of time series identified by the parameters provided in input, and return a Pandas DataFrame as result
+
+
+   :param provider: Name of the provider
+   :type provider: str
+   :param id: Timeseries key
+   :type id: str
+   :param start: Start time - optional
+   :type start: str
+   :param end: End time - optional
+   :type end: str
+   :param dataflow: Identifier of the dataflow - optional
+   :type dataflow: str
+   :param filter: Filter to be applied - optional
+   :type filter: str
+
+   :returns: * *pd.DataFrame* -- A pandas DataFrame of time series identified by the parameters provided in input
+             * *Dict[str, str]* -- A dictionary containing time series attributes
+
+   .. rubric:: Examples
+
+   >>> SDMX V2
+   >>> ## get single time series:
+   >>> my_ts=get_timeseries_table('ECB',id='EXR.A.USD.EUR.SP00.A')
+   >>> ## get monthly and annual frequency:
+   >>> my_ts=get_timeseries_table('ECB',id='EXR.A+M.USD.EUR.SP00.A')
+   >>> ## get all available frequencies:
+   >>> my_ts=get_timeseries_table('ECB',id='EXR..USD.EUR.SP00.A')
+   >>>
+   >>> # SDMX V3
+   >>>
+   >>> ## get single time series:
+   >>> my_ts=get_timeseries_table('ECB', dataflow='EXR', id='A.USD.EUR.SP00.A')
+   >>> ## get monthly and annual frequency:
+   >>> my_ts=get_timeseries_table('ECB', dataflow='EXR', id='A+M.USD.EUR.SP00.A')
+   >>> ## get all available frequencies:
+   >>> my_ts=get_timeseries_table('ECB', dataflow='EXR', id='.USD.EUR.SP00.A')
+   >>>
+   >>> #or
+   >>>
+   >>> ## get single time series: EXR.A.USD.EUR.SP00.A
+   >>> my_ts=get_timeseries_table('ECB', dataflow='EXR', filter='c[FREQ]=A&c[CURRENCY]=USD&c[CURRENCY_DENOM]=EUR&c[EXR_TYPE]=SP00&c[EXR_SUFFIX]=A')
+   >>> ## get monthly and annual frequency:
+   >>> my_ts=get_timeseries_table('ECB', dataflow='EXR', filter='c[FREQ]=A,M&c[CURRENCY]=USD&c[CURRENCY_DENOM]=EUR&c[EXR_TYPE]=SP00&c[EXR_SUFFIX]=A')
+   >>> ## get all available frequencies:
+   >>> my_ts=get_timeseries_table('ECB', dataflow='EXR', filter='c[CURRENCY]=USD&c[CURRENCY_DENOM]=EUR&c[EXR_TYPE]=SP00&c[EXR_SUFFIX]=A')
+
+
+.. py:function:: get_timeseries_revisions(provider, id='', start='', end='', updated_after='', include_history=True)
+
+   Extract time series updates
+
+   This function is used to extract time series starting from a specific update time and with history of revisions. This function works as get_timeseries_table but the query can be narrowed to getting only observations that were updated after a specific point in time, and eventually it returns the revision history of the matching time series. The result is packed into a pandas DataFrame
+
+
+   :param provider: Name of the provider
+   :type provider: str
+   :param id: Timeseries key
+   :type id: str
+   :param start: Start time - optional
+   :type start: str
+   :param end: End time - optional
+   :type end: str
+   :param updated_after: Used to select only records modified after a certain date (format 'YYYY-MM-DD') - optional
+   :type updated_after: str
+   :param include_history: If true the full list of revisions will be returned - optional
+   :type include_history: bool
+
+   :returns: * *pd.DataFrame* -- A pandas DataFrame of time series identified by the parameters provided in input
+             * *Dict[str, str]* -- A dictionary containing time series attributes
+
+   .. rubric:: Examples
+
+   >>> # get single time series with history:
+   >>> my_ts=get_timeseries_revisions('ECB','EXR.A.USD.EUR.SP00.A', includeHistory=TRUE)
+   >>> # get single time series (only observations updated after january 1st 2015):
+   >>> my_ts=get_timeseries_revisions('ECB','EXR.A.USD.EUR.SP00.A', updatedAfter='2015', includeHistory=F)
+   >>> # get single time series (full revision history starting from january 1st 2015):
+   >>> my_ts=get_timeseries_revisions('ECB','EXR.A.USD.EUR.SP00.A', updatedAfter='2015', includeHistory=TRUE)
+
+

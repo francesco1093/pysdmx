@@ -1,0 +1,50 @@
+:py:mod:`sdmx_python.ts_converter`
+==================================
+
+.. py:module:: sdmx_python.ts_converter
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   sdmx_python.ts_converter.convert_dim_list
+   sdmx_python.ts_converter.convert_hashtable
+   sdmx_python.ts_converter.convert_timeseries_list
+   sdmx_python.ts_converter.convert_timeseries_dataframe
+   sdmx_python.ts_converter.convert_single_timeseries
+   sdmx_python.ts_converter.zoo
+   sdmx_python.ts_converter.make_SDMXTS
+
+
+
+.. py:function:: convert_dim_list(dl)
+
+   Converts the list of SDMX dimensions to a Python list.
+
+   This function is used to convert an input list of SDMX dimensions into a list of Dimension namedtuples, containing the dimension id and full identifier. The dimension id can be used to query dimension codes via the function get_codes
+
+
+.. py:function:: convert_hashtable(ht)
+
+
+.. py:function:: convert_timeseries_list(tsl)
+
+
+.. py:function:: convert_timeseries_dataframe(table)
+
+
+.. py:function:: convert_single_timeseries(jpts, plain=False)
+
+
+.. py:function:: zoo(values, order_by)
+
+
+.. py:function:: make_SDMXTS(freq, times, values, enforce_format=None)
+
+
