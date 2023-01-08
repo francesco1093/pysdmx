@@ -3,6 +3,5 @@
 *__pycache__
 todo/*
 src/pysdmx/draft_*
-
-# Sphinx documentation
-docs/_build/
+docs/_build/*
+demo/demo*
