@@ -1,8 +1,7 @@
 from collections import namedtuple
 import pandas as pd
 from .JVM_Setup import Utils
-
-#This function is used to convert an input list of SDMX dimensions into a list of Dimension namedtuples, containing the dimension id and full identifier. The dimension id can be used to query dimension codes via the function get_codes
+import warnings
 
 def convert_dim_list(dl):
     """Converts the list of SDMX dimensions to a Python list. 
@@ -37,21 +36,20 @@ def convert_timeseries_dataframe(table):
     meta_names = ['OBS_VALUE', 'TIME_PERIOD'] + meta_names
     meta_list = [observations, time] + meta_list
     result = pd.DataFrame([list(i) for i in zip(*meta_list)], columns=meta_names)
-
-    #handling errors
+    
+    #check errors
     error_objects = None
     if table.isErrorFlag():
         error_objects = table.getErrorObjects()
         attrs['ERROR_OBJECTS'] = error_objects
         raise Warning('The results contain errors. Please check the ERROR_OBJECTS attribute')
-    return result, attrs
+
+    result.attrs = attrs
+    return result
     
 def convert_single_timeseries(jpts, plain = False):
     freq = jpts.getFrequency()
-    print(freq)
     time_slots = jpts.timeSlotsArray
-    print(time_slots)
-    print()
 
     if jpts.isNumeric():
         observations = Utils.toDoubleArray(jpts)
@@ -66,7 +64,8 @@ def convert_single_timeseries(jpts, plain = False):
     if num_obs > 0 and num_obs == num_times:
         if freq is None:
             print(jpts.getName(), ": frequency is NULL. Irregular timeseries defined")	 
-        result = make_SDMXTS(freq, time_slots, observations, plain)
+        result = pd.Series(observations, index=time_slots)
+        #result = make_SDMXTS(freq, time_slots, observations, plain)
 
         #set attributes missing!! TODO
         #attrs <- attributes(result)
@@ -81,63 +80,12 @@ def convert_single_timeseries(jpts, plain = False):
         err_flag = attrs["IS_ERROR"] = jpts.isErrorFlag()
         if err_flag:
             attrs["ERROR_MSG"] = jpts.getErrorMessage()
-            print('The time series ', jpts.getName(), ' contains errors. Please check the ERROR_MSG attribute')
+            warnings.warn('The time series ', jpts.getName(), ' contains errors. Please check the ERROR_MSG attribute')
 
         result.name = jpts.getName()
         result.attrs.update(attrs)
 
     else:
-        print("Warning building timeseries '", jpts.getName(), "': number of observations and time slots equal to zero, or not matching: ", num_obs, " ", num_times, "\n")
+        warnings.warn("Warning building timeseries '", jpts.getName(), "': number of observations and time slots equal to zero, or not matching: ", num_obs, " ", num_times, "\n")
     return result
 
-def zoo(values, order_by):
-    return values
-
-# currently not validating timeseries frequency as it is done in zoo
-def make_SDMXTS(freq, times, values, enforce_format = None):
-    if len(values) > 0:
-        if not enforce_format:
-            tmp_ts = pd.Series(values, index=pd.to_datetime(times))
-
-        elif enforce_format == 'plain':
-            # format will always be: yyyy-mm-ddThh:mm:ss
-            return
-            '''
-            if freq is None:
-                tmp_ts = zoo(values, order_by = "Date(times)")
-
-            else:
-                if freq == 'M':
-                    tmp_ts = zoo(values, order_by = "yearmon(Date(times)),frequency=12")
-                elif(freq == 'Q'):
-                    tmp_ts = zoo(values, order_by = "yearqtr(Date(times)),frequency=4")
-                else:
-                    tmp_ts = zoo(values, order_by = "Date(times)")
-            '''
-        else:
-            #do we need distinct cases? do we need to set freq
-            if freq == 'A':
-                # we expect a string year ('1984')
-                tmp_ts = pd.Series(values, index=pd.to_datetime(times, format='%Y'))
-                tmp_ts.index.freq = pd.infer_freq(tmp_ts.index)
-                assert tmp_ts.index.freq == 'AS-JAN'
-            elif freq == 'M':
-                # we expect '1984-02'
-                #times = sub(pattern='M', replacement='-', times) # OECD only '1984-M2'
-                tmp_ts = pd.Series(values, index=pd.to_datetime(times, format='%Y-%m'))
-            elif freq == 'Q':
-                # we expect '1984-Q2' TODO
-                tmp_ts = pd.Series(values, index=pd.to_datetime(times))
-            elif freq == 'D' or freq == 'B':
-                # we expect '1984-03-27'
-                tmp_ts = pd.Series(values, index=pd.to_datetime(times, format='%Y-%m-%d'))
-            
-            
-            else:
-                # nothing we can forecast
-                tmp_ts = pd.Series(values, index=pd.to_datetime(times))
-
-    else:
-        tmp_ts = pd.Series()
-
-    return tmp_ts

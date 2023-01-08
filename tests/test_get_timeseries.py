@@ -1,28 +1,25 @@
-from pysdmx.sdmx_client import get_timeseries
-import pandas as pd
+from pysdmx import get_timeseries
 
 def test_get_timeseries_v2():
-    # SDMX V2
-    ## get single time series:
+    timeseries=get_timeseries('ECB',id='EXR.A.USD.EUR.SP00.A')
+    print(timeseries)
+    timeseries=get_timeseries('ECB',id='EXR.Q.USD.EUR.SP00.A')
+    print(timeseries)
+    #timeseries=get_timeseries('ECB',id='EXR.B.USD.EUR.SP00.A')
+    #print(timeseries)
+    timeseries=get_timeseries('ECB',id='EXR.D.USD.EUR.SP00.A')
+    print(timeseries)
+    # timeseries=get_timeseries('ECB',id='EXR.S.USD.EUR.SP00.A')
+    # print(timeseries)
+    # timeseries=get_timeseries('ECB',id='EXR.E.USD.EUR.SP00.A')
+    # print(timeseries)
+    # timeseries=get_timeseries('ECB',id='EXR.W.USD.EUR.SP00.A')
+    # print(timeseries)
     timeseries=get_timeseries('ECB',id='EXR.H.USD.EUR.SP00.A')
     print(timeseries)
-    # print(timeseries[0])
-    print(timeseries[0].index)
-    # #timeseries[0].index.freq = 'D'
-    # print(timeseries[0].index.freq)
-    # print(pd.infer_freq(timeseries[0].index))
-    # timeseries[0].index.freq = pd.infer_freq(timeseries[0].index)
-    # print(timeseries[0].index)
-    # #print(timeseries[0].attrs)
-    # print('Name ', timeseries[0].name)
+    timeseries=get_timeseries('ECB',id='EXR.M.USD.EUR.SP00.A')
+    print(timeseries)
     assert isinstance(timeseries, list)
-
-    #print(attrs)
-    #assert isinstance(attrs, dict)
-    ## get monthly and annual frequency: 
-    #my_ts=get_timeseries('ECB',id='EXR.A+M.USD.EUR.SP00.A')
-    ## get all available frequencies: 
-    #my_ts=get_timeseries('ECB',id='EXR..USD.EUR.SP00.A')
 
 print(test_get_timeseries_v2())
 

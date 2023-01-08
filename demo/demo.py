@@ -1,4 +1,4 @@
-from .smdx_client import get_codes, get_dimensions, get_dsd_identifier, get_flows, get_providers, get_timeseries
+from pysdmx import get_codes, get_dimensions, get_dsd_identifier, get_flows, get_providers, get_timeseries
 import matplotlib.pyplot as plt
 
 #https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html

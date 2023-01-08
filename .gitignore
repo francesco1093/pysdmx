@@ -1,6 +1,8 @@
 .pytest_cache
 .ipynb_checkpoints
 *__pycache__
+todo/*
+src/pysdmx/draft_*
 
 # Sphinx documentation
 docs/_build/

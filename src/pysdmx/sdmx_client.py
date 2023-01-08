@@ -1,8 +1,8 @@
 from typing import Dict
-from .JVM_Setup import SdmxClientHandler
+from .JVM_Setup import SdmxClientHandler, Helper
 from .ts_converter import convert_hashtable, convert_dim_list, convert_timeseries_list, convert_timeseries_dataframe
 
-def get_providers() -> Dict[str, str]:
+def get_providers():
     """Extract the list of available Data Providers. 
     
     This function is used to query the list of currently available data providers.
@@ -22,7 +22,28 @@ def get_providers() -> Dict[str, str]:
     providers = SdmxClientHandler.getProviders()
     return convert_hashtable(providers)
 
-def get_dsd_identifier(provider: str, dataflow: str) -> str:
+def add_provider(name, endpoint, needsCredentials=False, needsURLEncoding=False, supportsCompression=True, description=''):
+    """Add new provider. 
+    
+    Configure a new data provider (only SDMX 2.1 REST providers are supported). This function can be used to configure a new (SDMX 2.1 compliant, REST based) data provider.
+    
+    Parameters
+    ----------
+    name : str
+        the name of the provider
+    endpoint: str
+     the URL where the provider resides
+    needsCredentials : bool 
+        set this to TRUE if the user needs to authenticate to query the provider
+    supportsCompression : bool 
+        set this to TRUE if the provider is able to handle compression
+    description : str
+        a brief text description of the provider
+    """
+    SdmxClientHandler.addProvider(name, endpoint, needsCredentials, needsURLEncoding, supportsCompression, description)
+
+
+def get_dsd_identifier(provider, dataflow):
     """Extracts the dsd identifier of a DataFlow. 
     
     This function is used to retrieve the name of the keyfamily of the input dataflow.
@@ -46,7 +67,7 @@ def get_dsd_identifier(provider: str, dataflow: str) -> str:
     dsd = SdmxClientHandler.getDSDIdentifier(provider, dataflow)
     return dsd.toString()
 
-def get_flows(provider: str, pattern = '') -> Dict[str, str]:
+def get_flows(provider, pattern = ''):
     """Extract the list of DataFlows of a provider. 
     
     This function is used to query the list of dataflows of the provider. A matching pattern can be provided, if needed. 
@@ -72,7 +93,7 @@ def get_flows(provider: str, pattern = '') -> Dict[str, str]:
     flows = SdmxClientHandler.getFlows(provider, pattern)
     return convert_hashtable(flows)
 
-def get_dimensions(provider: str, dataflow: str) -> Dict[str, str]:
+def get_dimensions(provider, dataflow):
     """Extract the dimensions of a DataFlow. 
     
     This function is used to retrieve the list of dimensions of the input dataflow
@@ -96,7 +117,7 @@ def get_dimensions(provider: str, dataflow: str) -> Dict[str, str]:
     dimensions = SdmxClientHandler.getDimensions(provider, dataflow)
     return convert_dim_list(dimensions)
 
-def get_codes(provider, dataflow, dimension) -> Dict[str, str]:
+def get_codes(provider, dataflow, dimension):
     """Extract the codes relative to a specific dimension. 
     
     This function is used to retrieve the list of codes of the input dimension
@@ -123,7 +144,7 @@ def get_codes(provider, dataflow, dimension) -> Dict[str, str]:
     codes_dict = convert_hashtable(codes)
     return codes_dict
 
-def get_timeseries(provider: str, id: str ='', start: str ='', end: str ='', dataflow: str ='', filter: str ='') -> list:
+def get_timeseries(provider, id ='', start ='', end ='', dataflow ='', filter =''):
     """Extract a list of time series. 
     
     This function is used to extract a list of time series identified by the parameters provided in input.     
@@ -184,10 +205,8 @@ def get_timeseries(provider: str, id: str ='', start: str ='', end: str ='', dat
 def get_timeseries_table(provider, id='', start='', end='', dataflow='', filter=''):
     """Extract a list of time series as Pandas DataFrame
  
-    
     This function is used to extract a list of time series identified by the parameters provided in input, and return a Pandas DataFrame as result
 
-    
     Parameters
     ----------
     provider : str
@@ -281,5 +300,25 @@ def get_timeseries_revisions(provider, id='', start='', end='', updated_after=''
     tst = SdmxClientHandler.getTimeSeriesTable(provider, None, id, None, start, end, False, updated_after, include_history)
     return convert_timeseries_dataframe(tst)
 
-
+import shutil
+import subprocess
+import os
+def sdmx_help(internalJVM=True):
+  # fix for #41 on OS X
+    if internalJVM:
+        Helper.start()
+    else:
+        JAVA = shutil.which('java')
+        print(JAVA)
+        if len(JAVA) > 0 and len(JAVA[1]) > 0:
+             javaExe = JAVA
+             print('JVM detected: ', javaExe)
+             print(os.getcwd())
+             os.chdir('inst/java/')
+             print(os.getcwd())
+             subprocess.run([javaExe, ' -jar', 'SDMX.jar', 'it.bancaditalia.oss.sdmx.helper.SDMXHelper'])
+            
+        else:
+            print('Could not detect external JVM.')
+        
 
