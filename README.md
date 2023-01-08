@@ -17,4 +17,4 @@ A sample usage of the package can be found in the ``demo/`` folder.
 - ``interactive.ipynb`` provides an interactive query script where user can provide query inputs
 
 ## Tests
-Tests (still WIP) can be run using ```pytest tests/``
+Tests (still WIP) can be run using ``pytest tests/``
