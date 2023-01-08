@@ -7,7 +7,7 @@ This package is a Python interface to the Java library available at: https://git
 ## Documentation
 Documentation is based on ``sphinx`` and can be generated via 
 
-'''
+```
 cd docs
 make html
-'''
+```
