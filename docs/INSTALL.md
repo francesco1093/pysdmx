@@ -2,7 +2,7 @@
 
 ## Windows
 
-Please note that this package is based on the Pyjnius library. Pyjnius requires Java to be installed and Pyjnius needs to be able to access the jvm.dll file to start the JVM. In particular, you need to satisfy the following requirements:
+This package is based on the Pyjnius library. Pyjnius requires Java to be installed and Pyjnius needs to be able to access the jvm.dll file to start the JVM. In particular, you need to satisfy the following requirements:
 
 - As Pyjnius uses CPython, the C++ build tools need to be installed (download link here: https://visualstudio.microsoft.com/downloads/)
 - The Python requirements need to be installed. It is recommended to install a python virtual environment using the provided ``requirements.txt`` file (which includes cython and pyjnius)

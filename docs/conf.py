@@ -34,8 +34,8 @@ extensions = [
     "sphinx.ext.viewcode",
 ]
 
-autoapi_dirs = ["../src/sdmx_python"]  # location to parse for API reference
-autoapi_ignore = ["*test*", "*demo*", "*setup*"]
+autoapi_dirs = ["../src/pysdmx"]  # location to parse for API reference
+autoapi_ignore = ["*setup*",]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

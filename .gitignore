@@ -2,6 +2,6 @@
 .ipynb_checkpoints
 *__pycache__
 todo/*
-src/pysdmx/draft_*
+draft/*
 docs/_build/*
 demo/demo*
